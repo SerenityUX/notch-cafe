@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notch Cafe</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            cursor: pointer; /* Change cursor to pointer */
+        }
+        #bg-video {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <video id="bg-video" autoplay loop muted playsinline>
+        <source src="./videoBackground.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    
+    <audio id="background-audio" loop>
+        <source src="./NotchTalking.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Your content goes here -->
+
+    <script>
+        const audio = document.getElementById('background-audio');
+        
+        function playFromRandomPoint() {
+            audio.currentTime = Math.random() * audio.duration;
+            audio.play();
+        }
+        
+        document.body.addEventListener('click', function() {
+            if (audio.paused) {
+                playFromRandomPoint();
+            } else {
+                audio.pause();
+            }
+        });
+
+        audio.addEventListener('ended', playFromRandomPoint);
+    </script>
+</body>
+</html>
